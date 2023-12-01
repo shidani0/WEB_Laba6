@@ -1,0 +1,23 @@
+﻿@model List<string>
+
+<h2>Группировка товара по таблицам</h2>
+@{
+    var CurrentModel = Model.GroupBy(x => x.Substring(0, 1)).ToList();
+    for (int letterindex = 0; letterindex < CurrentModel.Count(); letterindex++)
+    {
+        <table class="table" style="width:20%; border: 1px solid;">
+            <thead>
+                <tr>
+                    <th class="text-center">@CurrentModel[letterindex].Key</th>
+                </tr>
+            </thead>
+            @for (int objectindex = 0; objectindex < CurrentModel[letterindex].Count(); objectindex++)
+            {
+                <tr class="text-center">
+                    <td>@CurrentModel[letterindex].ElementAt(objectindex)</td>
+                </tr>
+            }
+            <hr/>
+        </table>
+    }
+}
